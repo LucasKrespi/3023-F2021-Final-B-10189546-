@@ -6,13 +6,18 @@ using UnityEngine.Events;
 
 public class SingletonTime : MonoBehaviour
 {
-    [SerializeField]
-    public int minutos;
-    public int horas;
-    public int dias;
+    [HideInInspector]
+    public int minutes;
+    [HideInInspector]
+    public int hours;
+    [HideInInspector]
+    public int days;
+    [HideInInspector]
     private int weekCounter;
-    public int semanas;
-    public int anos;
+    [HideInInspector]
+    public int weeks;
+    [HideInInspector]
+    public int years;
 
     public static SingletonTime instance;
 
@@ -37,67 +42,68 @@ public class SingletonTime : MonoBehaviour
         }
 
         timer = 0;
-        minutos = 0;
-        horas = 0;
-        dias = 1;
+        minutes = 0;
+        hours = 0;
+        days = 1;
         weekCounter = 1;
-        semanas = 1;
-        anos = 2021;
+        weeks = 1;
+        years = 2021;
     }
 
     private void Update()
     {
+        //For debug
         if (Input.GetKeyDown(KeyCode.N))
         {
-            dias++;
+            days++;
             weekCounter++;
             dayChange.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            dias--;
+            days--;
             weekCounter--;
             dayChange.Invoke();
         }
-    }
-
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
+    //}
+  
+    //// Update is called once per frame
+    //private void FixedUpdate()
+    //{
         timer += Time.deltaTime;
 
         if(timer >= 2)
         {
-            minutos += 30;
+            minutes += 30;
             timer = 0;
         }
 
-        if(minutos >= 60)
+        if(minutes >= 60)
         {
-            horas += 1;
-            minutos = 0;
+            hours += 1;
+            minutes = 0;
         }
 
-        if( horas >= 24)
+        if( hours >= 24)
         {
-            dias += 1;
+            days += 1;
             dayChange.Invoke();
             weekCounter += 1;
-            horas = 0;
+            hours = 0;
         }
 
         if(weekCounter > 7)
         {
-            semanas += 1;
+            weeks += 1;
             weekCounter = 1;
         }
 
-        if(semanas > 4)
+        if(weeks > 4)
         {
-            anos += 1;
-            semanas = 1;
-            dias = 1;
+            years += 1;
+            weeks = 1;
+            days = 1;
             yearChange.Invoke();
         }
     }

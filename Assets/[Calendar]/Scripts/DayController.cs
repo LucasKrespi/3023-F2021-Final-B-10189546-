@@ -87,7 +87,7 @@ public class DayController : MonoBehaviour
     private bool isCurrentDay()
     {
            
-        if (day == SingletonTime.instance.dias)
+        if (day == SingletonTime.instance.days)
         {
             return true;
         }
